@@ -25,8 +25,13 @@ SECRET_KEY = 'b11x*0-xr569$d%-_f86gbd_hn2va$$a-d^p8v973)16@g71a('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ADMINS = (
+     ('Eric Lehmer', 'elehmer@berkeley.edu'),
+)
 
+MANAGERS = ADMINS
+
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -37,7 +42,25 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'localflavor',
+    'registration',
+    'olwidget',
+    'ceqanet.app',
 )
+
+AUTH_PROFILE_MODULE = 'ceqanet.app.UserProfile'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+EMAIL_HOST = 'smtp.berkeley.edu'
+
+# Global switch for sending emails
+SENDEMAIL = False
+
+DEFAULT_FROM_EMAIL = 'opr@berkeley.edu'
+
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,9 +98,17 @@ WSGI_APPLICATION = 'ceqanet.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'ceqanet',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': 'ceqa',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',                      # Set to empty string for default.
     }
 }
 
@@ -95,6 +126,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/var/www/example.com/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://example.com/media/", "http://media.example.com/"
+MEDIA_URL = '/media/'
+
+FILE_UPLOAD_PERMISSIONS = 0644
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
