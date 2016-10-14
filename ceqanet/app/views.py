@@ -11,31 +11,31 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from ceqanet.forms import basicsearchform,prjlistform,doclistform,advancedsearchform,submitform,usersettingsform,attachmentsform,chqueryform,findprojectform,manageaccountform,requestupgrdform,manageupgradeform,manageusersform,manageuserform
-from ceqanet.forms import nocform,nodform,noeform,nopform
-from ceqanet.forms import editnocform,editnoeform,editnodform,editnopform
-from ceqanet.forms import pendingdetailnocform,pendingdetailnodform,pendingdetailnoeform,pendingdetailnopform
-from ceqanet.forms import addleadagencyform,addreviewingagencyform,addholidayform
-from ceqanet.forms import reviewdetailnocform,reviewdetailnopform
-from ceqanet.forms import commentaddform
-from ceqanet.models import projects,documents,geowords,leadagencies,reviewingagencies,doctypes,dockeywords,docgeowords,docreviews,latlongs,counties,UserProfile,clearinghouse,keywords,docattachments,requestupgrade,doccomments,holidays
-from ceqanet.forms import geocode, locationEditForm
+from ceqanet.app.forms import basicsearchform,prjlistform,doclistform,advancedsearchform,submitform,usersettingsform,attachmentsform,chqueryform,findprojectform,manageaccountform,requestupgrdform,manageupgradeform,manageusersform,manageuserform
+from ceqanet.app.forms import nocform,nodform,noeform,nopform
+from ceqanet.app.forms import editnocform,editnoeform,editnodform,editnopform
+from ceqanet.app.forms import pendingdetailnocform,pendingdetailnodform,pendingdetailnoeform,pendingdetailnopform
+from ceqanet.app.forms import addleadagencyform,addreviewingagencyform,addholidayform
+from ceqanet.app.forms import reviewdetailnocform,reviewdetailnopform
+from ceqanet.app.forms import commentaddform
+from ceqanet.app.models import projects,documents,geowords,leadagencies,reviewingagencies,doctypes,dockeywords,docgeowords,docreviews,latlongs,counties,UserProfile,clearinghouse,keywords,docattachments,requestupgrade,doccomments,holidays
+from ceqanet.app.forms import geocode, locationEditForm
 #split geo imports for simplicity
-from ceqanet.models import Locations
+from ceqanet.app.models import Locations
 from django.contrib.auth.models import User,Group
 
 from datetime import datetime
 #vectorformats trick
 from vectorformats.Formats import Django, GeoJSON, KML
 #import simplejson
-from django.utils import simplejson
+#from django.utils import simplejson
 from django.core import serializers
-from ceqanet.functions import generate_schno,generate_biaschno,delete_clearinghouse_document,email_rejection,email_submission,email_inreview,email_upgraderejection,email_upgradeacceptance,email_commentacceptance,email_acceptance,email_requestforupgrade,email_assigned,email_demotiontodraft
+from ceqanet.app.functions import generate_schno,generate_biaschno,delete_clearinghouse_document,email_rejection,email_submission,email_inreview,email_upgraderejection,email_upgradeacceptance,email_commentacceptance,email_acceptance,email_requestforupgrade,email_assigned,email_demotiontodraft
 
 import django.contrib.gis
 
 def index(request):
-    t = loader.get_template("ceqanet/index.html")
+    t = loader.get_template("app/index.html")
     c = RequestContext(request,{})
     return HttpResponse(t.render(c))
 

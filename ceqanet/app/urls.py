@@ -1,23 +1,23 @@
 from django.conf.urls import include,patterns, url
 from django.conf.urls.static import static
 from django.conf import settings
-from ceqanet.views import index,basicsearch,advancedsearch,prjlist,doclist,projectlist,projdoclist,submit,draftsbylag,pendingsbylag,chquery,findproject,accept,usersettings,attachments,manageaccount,requestupgrd,manageupgrades,manageupgrade,manageusers,manageuser,reviewsbylag
-from ceqanet.views import docdesp_noc,docdesp_noe,docdesp_nod,docdesp_nop
-from ceqanet.views import docadd_noc,docadd_nod,docadd_noe,docadd_nop
-from ceqanet.views import docedit_noc,docedit_noe,docedit_nod,docedit_nop
-from ceqanet.views import draftedit_noc,draftedit_nod,draftedit_noe,draftedit_nop
-from ceqanet.views import pending,pendingdetail_noc,pendingdetail_nod,pendingdetail_noe,pendingdetail_nop,latest,addleadagency,addreviewingagency,addholiday
-from ceqanet.views import review,reviewdetail_noc,reviewdetail_nop
-from ceqanet.views import comment,commentdetail,commentadd,showcomment,commentaccept
+from ceqanet.app.views import index,basicsearch,advancedsearch,prjlist,doclist,projectlist,projdoclist,submit,draftsbylag,pendingsbylag,chquery,findproject,accept,usersettings,attachments,manageaccount,requestupgrd,manageupgrades,manageupgrade,manageusers,manageuser,reviewsbylag
+from ceqanet.app.views import docdesp_noc,docdesp_noe,docdesp_nod,docdesp_nop
+from ceqanet.app.views import docadd_noc,docadd_nod,docadd_noe,docadd_nop
+from ceqanet.app.views import docedit_noc,docedit_noe,docedit_nod,docedit_nop
+from ceqanet.app.views import draftedit_noc,draftedit_nod,draftedit_noe,draftedit_nop
+from ceqanet.app.views import pending,pendingdetail_noc,pendingdetail_nod,pendingdetail_noe,pendingdetail_nop,latest,addleadagency,addreviewingagency,addholiday
+from ceqanet.app.views import review,reviewdetail_noc,reviewdetail_nop
+from ceqanet.app.views import comment,commentdetail,commentadd,showcomment,commentaccept
 #map related views
-from ceqanet.views import locations_geojson, map, locationEdit
+from ceqanet.app.views import locations_geojson, map, locationEdit
 #document api
-from ceqanet.views import doc_json,doc_location
+from ceqanet.app.views import doc_json,doc_location
 #from registration.backends.default.views import register
-#from ceqanet.forms import UserRegistrationForm
+#from ceqanet.app.forms import UserRegistrationForm
 #import regbackend
 
-urlpatterns = patterns('ceqanet.views',
+urlpatterns = patterns('ceqanet.app.views',
     url(r'^$','index',name='index'),
     url(r'^search/$',basicsearch.as_view(),name='basicsearch'),
     url(r'^search/advanced/$',advancedsearch.as_view(),name='advancedsearch'),

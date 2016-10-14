@@ -1,6 +1,6 @@
 import os
 from django.core.urlresolvers import reverse
-from ceqanet.models import documents,projects,latlongs,dockeywords,docgeowords,docreviews,docattachments,clearinghouse,Locations,doccomments,requestupgrade
+from ceqanet.app.models import documents,projects,latlongs,dockeywords,docgeowords,docreviews,docattachments,clearinghouse,Locations,doccomments,requestupgrade
 from django.contrib.auth.models import User,Group
 from django.core.mail import send_mail,EmailMultiAlternatives
 from datetime import datetime
