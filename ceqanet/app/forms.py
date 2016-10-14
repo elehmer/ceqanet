@@ -5,7 +5,7 @@ from olwidget.fields import EditableLayerField
 from olwidget.widgets import EditableMap
 from datetime import datetime, date, timedelta
 from django.contrib.auth.models import Group
-from ceqanet.models import projects,documents,geowords,reviewingagencies,leadagencies,keywords,doctypes,docattachments,Locations,holidays
+from ceqanet.app.models import projects,documents,geowords,reviewingagencies,leadagencies,keywords,doctypes,docattachments,Locations,holidays
 from localflavor.us.forms import USPhoneNumberField,USStateField,USZipCodeField
 from enumerations import DOCUMENT_TYPES,PROJECT_EXISTS,EXEMPT_STATUS_CHOICES,PLANNERREGION_CHOICES,COLATION_CHOICES,PRJ_SORT_FIELDS,DOC_SORT_FIELDS,RDODATE_CHOICES,RDOPLACE_CHOICES,RDOLAG_CHOICES,RDORAG_CHOICES,RDODOCTYPE_CHOICES,DETERMINATION_CHOICES,NODAGENCY_CHOICES,RDOLAT_CHOICES,RDODEVTYPE_CHOICES,RDOISSUE_CHOICES,RDOTITLE_CHOICES,RDODESCRIPTION_CHOICES,UPGRADE_CHOICES,COMMENT_CHOICES,NODFEESPAID_CHOICES
 from django.contrib.admin.widgets import FilteredSelectMultiple
