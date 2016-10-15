@@ -11,8 +11,8 @@ onload="init()"
 {% block extrajs %}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script src="//cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.js"></script>
-<script type="text/javascript" src="{% static 'ceqanet/js/minimap.js' %}"></script>
-<link rel="stylesheet" href="{% static 'ceqanet/css/minimap.css' %}">
+<script type="text/javascript" src="{% static 'app/js/minimap.js' %}"></script>
+<link rel="stylesheet" href="{% static 'app/css/minimap.css' %}">
 <script type="text/javascript">
 //take the doc id get the geojson and add it to the map centering on the data
 var doc={{doc}};
@@ -242,9 +242,9 @@ var doc={{doc}};
       <tr> 
         <td>
           {% if doc.doc_exministerial %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}">
+            <img src="{% static "app/img/check0.gif" %}">
           {% endif %}
           &nbsp;Ministerial
         </td>
@@ -252,9 +252,9 @@ var doc={{doc}};
       <tr> 
         <td>
           {% if doc.doc_exdeclared %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}">
+            <img src="{% static "app/img/check0.gif" %}">
           {% endif %}
           &nbsp;Declared Emergency
         </td>
@@ -262,9 +262,9 @@ var doc={{doc}};
       <tr> 
         <td>
           {% if doc.doc_exemergency %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}">
+            <img src="{% static "app/img/check0.gif" %}">
           {% endif %}
           &nbsp;Emergency Project
         </td>
@@ -272,9 +272,9 @@ var doc={{doc}};
       <tr> 
         <td>
           {% if doc.doc_excategorical %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}">
+            <img src="{% static "app/img/check0.gif" %}">
           {% endif %}
           &nbsp;Categorical Exemption
         </td>
@@ -282,9 +282,9 @@ var doc={{doc}};
       <tr> 
         <td>
           {% if doc.doc_exstatutory %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}">
+            <img src="{% static "app/img/check0.gif" %}">
           {% endif %}
           &nbsp;Statutory Exemption
         </td>

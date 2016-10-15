@@ -11,8 +11,8 @@ onload="init()"
 {% block extrajs %}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script src="//cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.js"></script>
-<script type="text/javascript" src="{% static 'ceqanet/js/minimap.js' %}"></script>
-<link rel="stylesheet" href="{% static 'ceqanet/css/minimap.css' %}">
+<script type="text/javascript" src="{% static 'app/js/minimap.js' %}"></script>
+<link rel="stylesheet" href="{% static 'app/css/minimap.css' %}">
 <script type="text/javascript">
 //take the doc id get the geojson and add it to the map centering on the data
 var doc={{doc}};
@@ -240,15 +240,15 @@ var doc={{doc}};
         <td>
           This is to advise that the 
           {% if doc.doc_nodbylead %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           Lead Agency &nbsp; 
           {% if doc.doc_nodbyresp %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           Responsible Agency &nbsp; 
           {% if doc.doc_nodagency.strip = '' %} 
@@ -270,15 +270,15 @@ var doc={{doc}};
         <td>
           1. The project 
           {% if doc.doc_detsigeffect %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           will &nbsp; 
           {% if doc.doc_detnotsigeffect %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           will not have a significant effect on the environment.
         </td>
@@ -287,9 +287,9 @@ var doc={{doc}};
         <td>
           2. 
           {% if doc.doc_deteir %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           An Environmental Impact Report was prepared for this project pursuant to 
           the provisions of CEQA.
@@ -299,9 +299,9 @@ var doc={{doc}};
         <td>
           &nbsp;&nbsp;&nbsp;
           {% if doc.doc_detnegdec %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           A Negative Declaration was prepared for this project pursuant to the provisions 
           of CEQA.
@@ -311,15 +311,15 @@ var doc={{doc}};
         <td>
           3. Mitigation measures 
           {% if doc.doc_detmitigation %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           were &nbsp; 
           {% if doc.doc_detnotmitigation %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           were not made a condition of the approval of the project.
         </td>
@@ -328,15 +328,15 @@ var doc={{doc}};
         <td>
           4. A Statement of Overriding Considerations 
           {% if doc.doc_detconsider %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           was &nbsp; 
           {% if doc.doc_detnotconsider %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           was not adopted for this project.
         </td>
@@ -345,15 +345,15 @@ var doc={{doc}};
         <td>
           5. Findings 
           {% if doc.doc_detfindings %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           were &nbsp; 
           {% if doc.doc_detnotfindings %}
-            <img src="{% static "ceqanet/img/check1.gif" %}"> 
+            <img src="{% static "app/img/check1.gif" %}"> 
           {% else %}
-            <img src="{% static "ceqanet/img/check0.gif" %}"> 
+            <img src="{% static "app/img/check0.gif" %}"> 
           {% endif %}
           were not made pursuant to the provisions of CEQA.
         </td>
