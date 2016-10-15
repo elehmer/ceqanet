@@ -40,7 +40,7 @@ def index(request):
     return HttpResponse(t.render(c))
 
 class basicsearch(FormView):
-    template_name="ceqanet/basicsearch.html"
+    template_name="app/basicsearch.html"
     form_class = basicsearchform
 
     def get_success_url(self):
@@ -54,7 +54,7 @@ class basicsearch(FormView):
         return success_url
 
 class advancedsearch(FormView):
-    template_name="ceqanet/advancedsearch.html"
+    template_name="app/advancedsearch.html"
     form_class = advancedsearchform
 
     def get_success_url(self):
@@ -135,7 +135,7 @@ class advancedsearch(FormView):
         return success_url
 
 class prjlist(ListView):
-    template_name="ceqanet/prjlist.html"
+    template_name="app/prjlist.html"
     context_object_name = "prjs"
     paginate_by = 25
 
@@ -253,7 +253,7 @@ class prjlist(ListView):
         return context
 
 class doclist(ListView):
-    template_name="ceqanet/doclist.html"
+    template_name="app/doclist.html"
     context_object_name = "docs"
     paginate_by = 25
 
@@ -369,7 +369,7 @@ class doclist(ListView):
         return context
 
 class submit(FormView):
-    template_name="ceqanet/submit.html"
+    template_name="app/submit.html"
     form_class = submitform
 
     def get_success_url(self):
@@ -400,7 +400,7 @@ class submit(FormView):
         return super(submit, self).dispatch(*args, **kwargs)
 
 class draftsbylag(ListView):
-    template_name ="ceqanet/draftsbylag.html"
+    template_name ="app/draftsbylag.html"
     context_object_name = "draftsbylag"
     paginate_by = 25
 
@@ -429,7 +429,7 @@ def DraftsByLAGQuery(request):
     return queryset
 
 class pendingsbylag(ListView):
-    template_name ="ceqanet/pendingsbylag.html"
+    template_name ="app/pendingsbylag.html"
     context_object_name = "pendingsbylag"
 
     def get_queryset(self):
@@ -458,7 +458,7 @@ def PendingsByLAGQuery(request):
     return queryset
 
 class reviewsbylag(ListView):
-    template_name="ceqanet/reviewsbylag.html"
+    template_name="app/reviewsbylag.html"
     context_object_name = "reviewsbylag"
     paginate_by = 25
 
@@ -488,7 +488,7 @@ def ReviewsByLAGQuery(request):
     return queryset
 
 class chquery(FormView):
-    template_name="ceqanet/chquery.html"
+    template_name="app/chquery.html"
     form_class = chqueryform
 
     def get_success_url(self):
@@ -527,7 +527,7 @@ class chquery(FormView):
         return super(chquery, self).dispatch(*args, **kwargs)
 
 class findproject(FormView):
-    template_name="ceqanet/findproject.html"
+    template_name="app/findproject.html"
     form_class = findprojectform
 
     def get_success_url(self):
@@ -573,7 +573,7 @@ class findproject(FormView):
         return super(findproject, self).dispatch(*args, **kwargs)
 
 class attachments(FormView):
-    template_name="ceqanet/attachments.html"
+    template_name="app/attachments.html"
     form_class = attachmentsform    
     
     def get_success_url(self):
@@ -628,7 +628,7 @@ class attachments(FormView):
         return super(attachments, self).dispatch(*args, **kwargs)
 
 class docadd_noc(FormView):
-    template_name="ceqanet/docadd_noc.html"
+    template_name="app/docadd_noc.html"
     form_class = nocform
 
     def get_success_url(self):
@@ -825,7 +825,7 @@ class docadd_noc(FormView):
         return super(docadd_noc, self).dispatch(*args, **kwargs)
 
 class docadd_nod(FormView):
-    template_name="ceqanet/docadd_nod.html"
+    template_name="app/docadd_nod.html"
     form_class = nodform
 
     def get_success_url(self):
@@ -1021,7 +1021,7 @@ class docadd_nod(FormView):
         return super(docadd_nod, self).dispatch(*args, **kwargs)
 
 class docadd_noe(FormView):
-    template_name="ceqanet/docadd_noe.html"
+    template_name="app/docadd_noe.html"
     form_class = noeform
 
     def get_success_url(self):
@@ -1172,7 +1172,7 @@ class docadd_noe(FormView):
         return super(docadd_noe, self).dispatch(*args, **kwargs)
 
 class docadd_nop(FormView):
-    template_name="ceqanet/docadd_nop.html"
+    template_name="app/docadd_nop.html"
     form_class = nopform
 
     def get_success_url(self):
@@ -1367,7 +1367,7 @@ class docadd_nop(FormView):
         return super(docadd_nop, self).dispatch(*args, **kwargs)
 
 class projectlist(ListView):
-    template_name="ceqanet/projectlist.html"
+    template_name="app/projectlist.html"
     context_object_name = "docs"
     paginate_by = 25
 
@@ -1443,7 +1443,7 @@ def ProjectListQuery(request):
     return queryset
 
 class projdoclist(ListView):
-    template_name="ceqanet/projdoclist.html"
+    template_name="app/projdoclist.html"
     context_object_name = "prjdocs"
 
     def get_queryset(self):
@@ -1458,7 +1458,7 @@ def ProjDocListQuery(request):
 
 class docdesp_noc(DetailView):
     model = documents
-    template_name="ceqanet/docdesp_noc.html"
+    template_name="app/docdesp_noc.html"
     context_object_name = "doc"
 
     def get_context_data(self, **kwargs):
@@ -1478,7 +1478,7 @@ class docdesp_noc(DetailView):
 
 class docdesp_nod(DetailView):
     model = documents
-    template_name="ceqanet/docdesp_nod.html"
+    template_name="app/docdesp_nod.html"
     context_object_name = "doc"
 
     def get_context_data(self, **kwargs):
@@ -1493,7 +1493,7 @@ class docdesp_nod(DetailView):
 
 class docdesp_noe(DetailView):
     model = documents
-    template_name="ceqanet/docdesp_noe.html"
+    template_name="app/docdesp_noe.html"
     context_object_name = "doc"
 
     def get_context_data(self, **kwargs):
@@ -1508,7 +1508,7 @@ class docdesp_noe(DetailView):
 
 class docdesp_nop(DetailView):
     model = documents
-    template_name="ceqanet/docdesp_nop.html"
+    template_name="app/docdesp_nop.html"
     context_object_name = "doc"
 
     def get_context_data(self, **kwargs):
@@ -1528,7 +1528,7 @@ class docdesp_nop(DetailView):
 
 class docedit_noc(FormView):
     form_class = editnocform
-    template_name="ceqanet/docedit_noc.html"
+    template_name="app/docedit_noc.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('docdesp_noc', args=[self.request.POST.get('doc_pk')])
@@ -1885,7 +1885,7 @@ class docedit_noc(FormView):
 
 class docedit_nod(FormView):
     form_class = editnodform
-    template_name="ceqanet/docedit_nod.html"
+    template_name="app/docedit_nod.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('docdesp_nod', args=[self.request.POST.get('doc_pk')])
@@ -2097,7 +2097,7 @@ class docedit_nod(FormView):
 
 class docedit_noe(FormView):
     form_class = editnoeform
-    template_name="ceqanet/docedit_noe.html"
+    template_name="app/docedit_noe.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('docdesp_noe', args=[self.request.POST.get('doc_pk')])
@@ -2280,7 +2280,7 @@ class docedit_noe(FormView):
 
 class docedit_nop(FormView):
     form_class = editnopform
-    template_name="ceqanet/docedit_nop.html"
+    template_name="app/docedit_nop.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('docdesp_nop', args=[self.request.POST.get('doc_pk')])
@@ -2632,28 +2632,28 @@ class docedit_nop(FormView):
         return super(docedit_nop, self).dispatch(*args, **kwargs)
 
 class draftedit_noc(docedit_noc):    
-    template_name="ceqanet/draftedit_noc.html"
+    template_name="app/draftedit_noc.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('draftsbylag')
         return success_url
 
 class draftedit_nod(docedit_nod):    
-    template_name="ceqanet/draftedit_nod.html"
+    template_name="app/draftedit_nod.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('draftsbylag')
         return success_url
 
 class draftedit_noe(docedit_noe):    
-    template_name="ceqanet/draftedit_noe.html"
+    template_name="app/draftedit_noe.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('draftsbylag')
         return success_url
 
 class draftedit_nop(docedit_nop):    
-    template_name="ceqanet/draftedit_nop.html"
+    template_name="app/draftedit_nop.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('draftsbylag')
@@ -2661,7 +2661,7 @@ class draftedit_nop(docedit_nop):
 
 class addleadagency(FormView):
     form_class = addleadagencyform
-    template_name="ceqanet/addleadagency.html"
+    template_name="app/addleadagency.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('index')
@@ -2683,7 +2683,7 @@ class addleadagency(FormView):
 
 class addreviewingagency(FormView):
     form_class = addreviewingagencyform
-    template_name="ceqanet/addreviewingagency.html"
+    template_name="app/addreviewingagency.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('index')
@@ -2703,7 +2703,7 @@ class addreviewingagency(FormView):
 
 class addholiday(FormView):
     form_class = addholidayform
-    template_name="ceqanet/addholiday.html"
+    template_name="app/addholiday.html"
 
     def get_success_url(self):
         success_url = reverse_lazy('index')
@@ -2738,7 +2738,7 @@ class addholiday(FormView):
         return super(addholiday, self).dispatch(*args, **kwargs)
 
 class manageusers(FormView):
-    template_name="ceqanet/manageusers.html"
+    template_name="app/manageusers.html"
     form_class = manageusersform
 
     def get_initial(self):
@@ -2767,7 +2767,7 @@ class manageusers(FormView):
 
 class manageuser(FormView):
     form_class = manageuserform
-    template_name="ceqanet/manageuser.html"
+    template_name="app/manageuser.html"
 
     def get_success_url(self):
         success_url = "%s?user_id=%s" % (reverse_lazy('manageuser'),self.request.POST.get('user_id'))
@@ -2834,7 +2834,7 @@ class manageuser(FormView):
         return super(manageuser, self).dispatch(*args, **kwargs)
 
 class pending(ListView):
-    template_name="ceqanet/pending.html"
+    template_name="app/pending.html"
     context_object_name = "pendings"
     paginate_by = 25
 
@@ -2863,7 +2863,7 @@ def PendingListQuery(request):
     return queryset
 
 class latest(ListView):
-    template_name="ceqanet/latest.html"
+    template_name="app/latest.html"
     context_object_name = "latests"
     paginate_by = 25
 
@@ -2890,7 +2890,7 @@ def LatestListQuery(request):
 
 class pendingdetail_noc(FormView):
     form_class = pendingdetailnocform
-    template_name="ceqanet/pendingdetail_noc.html"
+    template_name="app/pendingdetail_noc.html"
  
     def get_success_url(self):
         success_url = "%s" % reverse_lazy('pending')
@@ -3250,7 +3250,7 @@ class pendingdetail_noc(FormView):
 
 class pendingdetail_nod(FormView):
     form_class = pendingdetailnodform
-    template_name="ceqanet/pendingdetail_nod.html"
+    template_name="app/pendingdetail_nod.html"
 
     def get_success_url(self):
         success_url = "%s" % reverse_lazy('pending')
@@ -3489,7 +3489,7 @@ class pendingdetail_nod(FormView):
 
 class pendingdetail_noe(FormView):
     form_class = pendingdetailnoeform
-    template_name="ceqanet/pendingdetail_noe.html"
+    template_name="app/pendingdetail_noe.html"
  
     def get_success_url(self):
         success_url = "%s" % reverse_lazy('pending')
@@ -3689,7 +3689,7 @@ class pendingdetail_noe(FormView):
 
 class pendingdetail_nop(FormView):
     form_class = pendingdetailnopform
-    template_name="ceqanet/pendingdetail_nop.html"
+    template_name="app/pendingdetail_nop.html"
 
     def get_success_url(self):
         success_url = "%s" % reverse_lazy('pending')
@@ -4054,7 +4054,7 @@ class pendingdetail_nop(FormView):
         return super(pendingdetail_nop, self).dispatch(*args, **kwargs)
 
 class review(ListView):
-    template_name="ceqanet/review.html"
+    template_name="app/review.html"
     context_object_name = "reviews"
     paginate_by = 25
 
@@ -4084,7 +4084,7 @@ def ReviewListQuery(request):
 
 class reviewdetail_noc(FormView):
     form_class = reviewdetailnocform
-    template_name="ceqanet/reviewdetail_noc.html"
+    template_name="app/reviewdetail_noc.html"
 
     def get_success_url(self):
         success_url = "%s" % (reverse_lazy('review'))
@@ -4470,7 +4470,7 @@ class reviewdetail_noc(FormView):
 
 class reviewdetail_nop(FormView):
     form_class = reviewdetailnopform
-    template_name="ceqanet/reviewdetail_nop.html"
+    template_name="app/reviewdetail_nop.html"
 
     def get_success_url(self):
         success_url = "%s" % (reverse_lazy('review'))
@@ -4851,7 +4851,7 @@ class reviewdetail_nop(FormView):
         return super(reviewdetail_nop, self).dispatch(*args, **kwargs)
 
 class comment(ListView):
-    template_name="ceqanet/comment.html"
+    template_name="app/comment.html"
     context_object_name = "comments"
     paginate_by = 25
 
@@ -4881,7 +4881,7 @@ def CommentListQuery(request):
     return queryset
 
 class commentdetail(ListView):
-    template_name="ceqanet/commentdetail.html"
+    template_name="app/commentdetail.html"
     context_object_name = "comments"
 
     def get_queryset(self):
@@ -4914,7 +4914,7 @@ def CommentDetailListQuery(request):
 
 class commentadd(FormView):
     form_class = commentaddform
-    template_name="ceqanet/commentadd.html"
+    template_name="app/commentadd.html"
  
     def get_success_url(self):
         success_url = "%s?doc_pk=%s" % (reverse_lazy('commentdetail'),self.request.GET.get('doc_pk'))
@@ -4958,22 +4958,22 @@ class commentadd(FormView):
 
 class showcomment(DetailView):
     model = doccomments
-    template_name="ceqanet/showcomment.html"
+    template_name="app/showcomment.html"
     context_object_name = "doccomment"
 
 def commentaccept(request):
-    t = loader.get_template("ceqanet/commentaccept.html")
+    t = loader.get_template("app/commentaccept.html")
     c = RequestContext(request,{})
     return HttpResponse(t.render(c))
 
 def accept(request):
-    t = loader.get_template("ceqanet/accept.html")
+    t = loader.get_template("app/accept.html")
     c = RequestContext(request,{})
     return HttpResponse(t.render(c))
 
 class manageaccount(FormView):
     form_class = manageaccountform
-    template_name = "ceqanet/manageaccount.html"
+    template_name = "app/manageaccount.html"
 
     def get_success_url(self):
         success_url = "%s" % (reverse_lazy('index'))
@@ -5018,7 +5018,7 @@ class manageaccount(FormView):
 
 class requestupgrd(FormView):
     form_class = requestupgrdform
-    template_name = "ceqanet/requestupgrd.html"
+    template_name = "app/requestupgrd.html"
 
     def get_success_url(self):
         success_url = "%s" % (reverse_lazy('index'))
@@ -5052,7 +5052,7 @@ class requestupgrd(FormView):
         return super(requestupgrd, self).dispatch(*args, **kwargs)
 
 class manageupgrades(ListView):
-    template_name = "ceqanet/manageupgrades.html"
+    template_name = "app/manageupgrades.html"
     context_object_name = "upgrades"
 
     def get_queryset(self):
@@ -5074,7 +5074,7 @@ def ManageUpgradesListQuery(request):
 
 class manageupgrade(FormView):
     form_class = manageupgradeform
-    template_name = "ceqanet/manageupgrade.html"
+    template_name = "app/manageupgrade.html"
 
     def get_success_url(self):
         success_url = "%s" % (reverse_lazy('manageupgrades'))
@@ -5121,7 +5121,7 @@ class manageupgrade(FormView):
 
 class usersettings(FormView):
     form_class = usersettingsform
-    template_name="ceqanet/usersettings.html"
+    template_name="app/usersettings.html"
 
     def get_success_url(self):
         success_url = "%s" % (reverse_lazy('index'))
@@ -5219,14 +5219,14 @@ def doc_location(request,doc_id):
 def map(request):
     #form = basicqueryform()
     form = geocode()
-    t = loader.get_template("ceqanet/map.html")
+    t = loader.get_template("app/map.html")
     c = RequestContext(request,{'form':form})
     return HttpResponse(t.render(c))
     
 class locationEdit(UpdateView):
     model = Locations
     form_class = locationEditForm
-    template_name="ceqanet/mapform.html"
+    template_name="app/mapform.html"
     slug_field = "document"
     
     def get_queryset(self):
