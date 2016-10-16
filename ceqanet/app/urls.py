@@ -87,7 +87,7 @@ urlpatterns = patterns('ceqanet.app.views',
 
 urlpatterns += patterns('',
     #url(r'^accounts/register/$', register, {'backend': 'registration.backends.default.DefaultBackend','form_class': UserRegistrationForm}, name='registration_register'),    
-    url(r'^accounts/login/$','django.contrib.auth.views.login',{'template_name':'ceqanet/login.html'},name = 'login'),
+    url(r'^accounts/login/$','django.contrib.auth.views.login',{'template_name':'app/login.html'},name = 'login'),
     #url(r'^accounts/login/$','django.contrib.auth.views.login',name = 'login'),
     url(r'^accounts/logout/$','django.contrib.auth.views.logout', {'next_page': '/'}, name = 'logout'),
 )
