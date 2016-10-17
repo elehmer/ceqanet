@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.gis import admin
 from ceqanet.app.models import Locations
-from ceqanet.app.models import projects,documents,geowords,leadagencies,reviewingagencies,doctypes,dockeywords,docreviews,latlongs,counties,UserProfile,clearinghouse,keywords,docattachments
+from ceqanet.app.models import projects,documents,geowords,leadagencies,reviewingagencies,doctypes,dockeywords,docreviews,latlongs,counties,userprofile,clearinghouse,keywords,docattachments
 
 from olwidget.admin import GeoModelAdmin
 
@@ -25,7 +25,7 @@ admin.site.register(dockeywords)
 admin.site.register(docreviews)
 admin.site.register(latlongs)
 admin.site.register(counties)
-admin.site.register(UserProfile)
+admin.site.register(userprofile)
 admin.site.register(clearinghouse)
 admin.site.register(keywords)
 admin.site.register(docattachments)
