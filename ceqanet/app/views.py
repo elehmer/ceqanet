@@ -18,7 +18,7 @@ from ceqanet.app.forms import pendingdetailnocform,pendingdetailnodform,pendingd
 from ceqanet.app.forms import addleadagencyform,addreviewingagencyform,addholidayform
 from ceqanet.app.forms import reviewdetailnocform,reviewdetailnopform
 from ceqanet.app.forms import commentaddform
-from ceqanet.app.models import projects,documents,geowords,leadagencies,reviewingagencies,doctypes,dockeywords,docgeowords,docreviews,latlongs,counties,UserProfile,clearinghouse,keywords,docattachments,requestupgrade,doccomments,holidays
+from ceqanet.app.models import projects,documents,geowords,leadagencies,reviewingagencies,doctypes,dockeywords,docgeowords,docreviews,latlongs,counties,userprofile,clearinghouse,keywords,docattachments,requestupgrade,doccomments,holidays
 from ceqanet.app.forms import geocode, locationEditForm
 #split geo imports for simplicity
 from ceqanet.app.models import Locations
@@ -392,7 +392,7 @@ class submit(FormView):
     def get_context_data(self, **kwargs):
         context = super(submit, self).get_context_data(**kwargs)
 
-        context['laginfo'] = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        context['laginfo'] = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         return context
 
     @method_decorator(login_required)
@@ -425,7 +425,7 @@ class draftsbylag(ListView):
         return super(draftsbylag, self).dispatch(*args, **kwargs)
 
 def DraftsByLAGQuery(request):
-    queryset = documents.objects.filter(projects__prj_lag_fk__lag_pk=request.user.get_profile().set_lag_fk.lag_pk).filter(doc_draft=True)
+    queryset = documents.objects.filter(projects__prj_lag_fk__lag_pk=request.user.userprofile.set_lag_fk.lag_pk).filter(doc_draft=True)
     return queryset
 
 class pendingsbylag(ListView):
@@ -445,7 +445,7 @@ class pendingsbylag(ListView):
             qsminuspage.pop('page')
 
         context['restofqs'] = qsminuspage.urlencode()
-        context['la'] = self.request.user.get_profile().set_lag_fk.lag_name
+        context['la'] = self.request.user.userprofile.set_lag_fk.lag_name
 
         return context
 
@@ -454,7 +454,7 @@ class pendingsbylag(ListView):
         return super(pendingsbylag, self).dispatch(*args, **kwargs)
 
 def PendingsByLAGQuery(request):
-    queryset = documents.objects.filter(projects__prj_lag_fk__lag_pk=request.user.get_profile().set_lag_fk.lag_pk).filter(doc_pending=True).order_by('-doc_received','-doc_pk')
+    queryset = documents.objects.filter(projects__prj_lag_fk__lag_pk=request.user.userprofile.set_lag_fk.lag_pk).filter(doc_pending=True).order_by('-doc_received','-doc_pk')
     return queryset
 
 class reviewsbylag(ListView):
@@ -475,7 +475,7 @@ class reviewsbylag(ListView):
             qsminuspage.pop('page')
 
         context['restofqs'] = qsminuspage.urlencode()
-        context['la'] = self.request.user.get_profile().set_lag_fk.lag_name
+        context['la'] = self.request.user.userprofile.set_lag_fk.lag_name
 
         return context
 
@@ -484,7 +484,7 @@ class reviewsbylag(ListView):
         return super(reviewsbylag, self).dispatch(*args, **kwargs)
 
 def ReviewsByLAGQuery(request):
-    queryset = documents.objects.filter(projects__prj_lag_fk__lag_pk=request.user.get_profile().set_lag_fk.lag_pk).filter(doc_review=True).order_by('-doc_received','-doc_pk')
+    queryset = documents.objects.filter(projects__prj_lag_fk__lag_pk=request.user.userprofile.set_lag_fk.lag_pk).filter(doc_review=True).order_by('-doc_received','-doc_pk')
     return queryset
 
 class chquery(FormView):
@@ -507,7 +507,7 @@ class chquery(FormView):
         context = super(chquery, self).get_context_data(**kwargs)
 
         context['doctype'] = self.request.GET.get('doctype')
-        context['laglist'] = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        context['laglist'] = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
 
         return context
 
@@ -552,7 +552,7 @@ class findproject(FormView):
                 context['schnos'] = projects.objects.filter(prj_visible=True).filter(prj_schno__startswith=prj_schno).order_by('-prj_schno')
             if g.name == "leads":
                 if self.request.GET.get('leadorresp') == 'lead':
-                    context['schnos'] = projects.objects.filter(prj_visible=True).filter(prj_schno__startswith=prj_schno).filter(prj_lag_fk__lag_pk=self.request.user.get_profile().set_lag_fk.lag_pk).order_by('-prj_schno')
+                    context['schnos'] = projects.objects.filter(prj_visible=True).filter(prj_schno__startswith=prj_schno).filter(prj_lag_fk__lag_pk=self.request.user.userprofile.set_lag_fk.lag_pk).order_by('-prj_schno')
                 else:
                     context['schnos'] = projects.objects.filter(prj_visible=True).filter(prj_schno__startswith=prj_schno).filter(prj_lag_fk__lag_pk=self.request.GET.get('nodagency')).order_by('-prj_schno')
         context['doctype'] = self.request.GET.get('doctype')
@@ -648,9 +648,9 @@ class docadd_noc(FormView):
 
         initial['doc_conname'] = self.request.user.first_name + " " + self.request.user.last_name
         initial['doc_conemail'] = self.request.user.email
-        initial['doc_conphone'] = self.request.user.get_profile().conphone
+        initial['doc_conphone'] = self.request.user.userprofile.conphone
 
-        la_query = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        la_query = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         initial['doc_conaddress1'] = la_query.lag_address1
         initial['doc_conaddress2'] = la_query.lag_address2
         initial['doc_concity'] = la_query.lag_city
@@ -666,7 +666,7 @@ class docadd_noc(FormView):
         context['doctype'] = self.request.GET.get("doctype")
         if prj_pk != 'None':
             context['prjinfo'] = projects.objects.get(prj_pk__exact=self.request.GET.get("prj_pk"))
-        context['laglist'] = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        context['laglist'] = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
 
         return context
     
@@ -674,7 +674,7 @@ class docadd_noc(FormView):
         data = form.cleaned_data
         today = datetime.now()
         doc_received = today
-        lag = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        lag = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         doc = documents.objects.get(pk=0)
         cnty_fk = counties.objects.get(pk=0)
 
@@ -843,9 +843,9 @@ class docadd_nod(FormView):
 
         initial['doc_conname'] = self.request.user.first_name + " " + self.request.user.last_name
         initial['doc_conemail'] = self.request.user.email
-        initial['doc_conphone'] = self.request.user.get_profile().conphone
+        initial['doc_conphone'] = self.request.user.userprofile.conphone
 
-        la_query = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        la_query = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         initial['doc_conaddress1'] = la_query.lag_address1
         initial['doc_conaddress2'] = la_query.lag_address2
         initial['doc_concity'] = la_query.lag_city
@@ -868,14 +868,14 @@ class docadd_nod(FormView):
         #context['nodagency'] = leadagencies.objects.get(pk=self.request.GET.get("nodagency"))
         if prj_pk != 'None':
             context['prjinfo'] = projects.objects.get(prj_pk__exact=self.request.GET.get("prj_pk"))
-        context['laglist'] = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        context['laglist'] = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         return context
 
     def form_valid(self,form):
         data = form.cleaned_data
         today = datetime.now()
         doc_received = today
-        lag = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        lag = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         doc = documents.objects.get(pk=0)
         cnty_fk = counties.objects.get(pk=0)
         doct = doctypes.objects.get(pk=self.request.POST.get('doctype'))
@@ -1038,9 +1038,9 @@ class docadd_noe(FormView):
 
         initial['doc_conname'] = self.request.user.first_name + " " + self.request.user.last_name
         initial['doc_conemail'] = self.request.user.email
-        initial['doc_conphone'] = self.request.user.get_profile().conphone
+        initial['doc_conphone'] = self.request.user.userprofile.conphone
 
-        la_query = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        la_query = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         initial['doc_conaddress1'] = la_query.lag_address1
         initial['doc_conaddress2'] = la_query.lag_address2
         initial['doc_concity'] = la_query.lag_city
@@ -1056,14 +1056,14 @@ class docadd_noe(FormView):
         context['doctype'] = self.request.GET.get("doctype")
         if prj_pk != 'None':
             context['prjinfo'] = projects.objects.get(prj_pk__exact=self.request.GET.get("prj_pk"))
-        context['laglist'] = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        context['laglist'] = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         return context
 
     def form_valid(self,form):
         data = form.cleaned_data
         today = datetime.now()
         doc_received = today
-        lag = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        lag = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         doc = documents.objects.get(pk=0)
         cnty_fk = counties.objects.get(pk=0)
         doct = doctypes.objects.get(pk=self.request.POST.get('doctype'))
@@ -1189,9 +1189,9 @@ class docadd_nop(FormView):
 
         initial['doc_conname'] = self.request.user.first_name + " " + self.request.user.last_name
         initial['doc_conemail'] = self.request.user.email
-        initial['doc_conphone'] = self.request.user.get_profile().conphone
+        initial['doc_conphone'] = self.request.user.userprofile.conphone
 
-        la_query = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        la_query = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         initial['doc_conaddress1'] = la_query.lag_address1
         initial['doc_conaddress2'] = la_query.lag_address2
         initial['doc_concity'] = la_query.lag_city
@@ -1207,7 +1207,7 @@ class docadd_nop(FormView):
         context['doctype'] = self.request.GET.get("doctype")
         if prj_pk != 'None':
             context['prjinfo'] = projects.objects.get(prj_pk__exact=self.request.GET.get("prj_pk"))
-        context['laglist'] = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        context['laglist'] = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
 
         return context
     
@@ -1215,7 +1215,7 @@ class docadd_nop(FormView):
         data = form.cleaned_data
         today = datetime.now()
         doc_received = today
-        lag = leadagencies.objects.get(pk=self.request.user.get_profile().set_lag_fk.lag_pk)
+        lag = leadagencies.objects.get(pk=self.request.user.userprofile.set_lag_fk.lag_pk)
         doc = documents.objects.get(pk=0)
         cnty_fk = counties.objects.get(pk=0)
         doct = doctypes.objects.get(pk=self.request.POST.get('doctype'))
@@ -2781,11 +2781,11 @@ class manageuser(FormView):
         if grp.exists():
             initial['usr_grp'] = grp[0]
         
-        if usr.get_profile().set_lag_fk != None:
-            initial['set_lag_fk'] = leadagencies.objects.get(pk=usr.get_profile().set_lag_fk.lag_pk)
+        if usr.userprofile.set_lag_fk != None:
+            initial['set_lag_fk'] = leadagencies.objects.get(pk=usr.userprofile.set_lag_fk.lag_pk)
         
-        if usr.get_profile().set_rag_fk != None:
-            initial['set_rag_fk'] = reviewingagencies.objects.get(pk=usr.get_profile().set_rag_fk.rag_pk)
+        if usr.userprofile.set_rag_fk != None:
+            initial['set_rag_fk'] = reviewingagencies.objects.get(pk=usr.userprofile.set_rag_fk.rag_pk)
 
         return initial
 
@@ -2805,7 +2805,7 @@ class manageuser(FormView):
             usr.groups.clear()
             if data['usr_grp'] != None:
                 usr.groups.add(data['usr_grp'])
-            usrprof = UserProfile.objects.get(user_id=self.request.POST.get('user_id'))
+            usrprof = userprofile.objects.get(user_id=self.request.POST.get('user_id'))
             if data['usr_grp'] == None:
                 usrprof.set_lag_fk = None
                 usrprof.set_rag_fk = None
@@ -4876,7 +4876,7 @@ class comment(ListView):
         return super(comment, self).dispatch(*args, **kwargs)
 
 def CommentListQuery(request):
-    set_rag_fk = request.user.get_profile().set_rag_fk.rag_pk
+    set_rag_fk = request.user.userprofile.set_rag_fk.rag_pk
     queryset = docreviews.objects.filter(drag_rag_fk__rag_pk=set_rag_fk).filter(drag_doc_fk__doc_review=True).order_by('-drag_doc_fk__doc_received','-drag_doc_fk__doc_pk')
     return queryset
 
@@ -4908,7 +4908,7 @@ class commentdetail(ListView):
         return super(commentdetail, self).dispatch(*args, **kwargs)
 
 def CommentDetailListQuery(request):
-    drag_pk = docreviews.objects.filter(drag_doc_fk=request.GET.get('doc_pk')).filter(drag_rag_fk=request.user.get_profile().set_rag_fk)
+    drag_pk = docreviews.objects.filter(drag_doc_fk=request.GET.get('doc_pk')).filter(drag_rag_fk=request.user.userprofile.set_rag_fk)
     queryset = doccomments.objects.filter(dcom_drag_fk=drag_pk).order_by('dcom_pk')
     return queryset
 
@@ -4930,7 +4930,7 @@ class commentadd(FormView):
         data = form.cleaned_data
         today = datetime.now()
 
-        docreview = docreviews.objects.get(drag_doc_fk__doc_pk=self.request.GET.get('doc_pk'),drag_rag_fk__rag_pk=self.request.user.get_profile().set_rag_fk.rag_pk)
+        docreview = docreviews.objects.get(drag_doc_fk__doc_pk=self.request.GET.get('doc_pk'),drag_rag_fk__rag_pk=self.request.user.userprofile.set_rag_fk.rag_pk)
 
         if docreview.drag_numcomments:
             docreview.drag_numcomments = docreview.drag_numcomments + 1
@@ -4983,12 +4983,12 @@ class manageaccount(FormView):
         initial = super(manageaccount, self).get_initial()
 
         try:
-            us_query = self.request.user.get_profile()
+            us_query = self.request.user.userprofile
             initial['confirstname'] = self.request.user.first_name
             initial['conlastname'] = self.request.user.last_name
             initial['conemail'] = self.request.user.email
             initial['conphone'] = us_query.conphone
-        except UserProfile.DoesNotExist:
+        except userprofile.DoesNotExist:
             pass
         return initial
 
@@ -5006,7 +5006,7 @@ class manageaccount(FormView):
 
         conphone = data['conphone']
 
-        us = self.request.user.get_profile()
+        us = self.request.user.userprofile
         us.conphone = conphone
         us.save()
 
@@ -5094,7 +5094,7 @@ class manageupgrade(FormView):
 
         if data['allowupgrade'] == 'yes':
             usr = User.objects.get(pk=self.request.POST.get('user_id'))
-            usrprof = UserProfile.objects.get(user_id=self.request.POST.get('user_id'))
+            usrprof = userprofile.objects.get(user_id=self.request.POST.get('user_id'))
             if rqstupgrd.rqst_type == 'lead':
                 grp = Group.objects.get(name="leads")
                 usrprof.set_lag_fk = rqstupgrd.rqst_lag_fk
@@ -5130,7 +5130,7 @@ class usersettings(FormView):
     def get_initial(self):
         initial = super(usersettings, self).get_initial()
 
-        us_query = self.request.user.get_profile()
+        us_query = self.request.user.userprofile
         if us_query.set_lag_fk:
             initial['set_lag_fk'] = us_query.set_lag_fk.lag_pk
         if us_query.set_rag_fk:
@@ -5168,7 +5168,7 @@ class usersettings(FormView):
         if set_rag_fk == None:
             set_rag_fk = reviewingagencies.objects.get(pk=0)
 
-        us = self.request.user.get_profile()
+        us = self.request.user.userprofile
         us.set_lag_fk = set_lag_fk
         us.set_rag_fk = set_rag_fk
         us.save()
