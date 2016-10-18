@@ -372,7 +372,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=User)
 
 class requestupgrade(models.Model):
-    user_id = models.ForeignKey(User,unique=True,db_column="user_id",db_constraint=False)
+    user_id = models.OneToOneField(User,db_column="user_id",db_constraint=False)
     rqst_pending = models.NullBooleanField(null=True,blank=True)
     rqst_type = models.CharField(null=True,blank=True,max_length=10)
     rqst_lag_fk = models.ForeignKey("leadagencies",blank=True,null=True,db_column="rqst_lag_fk",db_constraint=False)
