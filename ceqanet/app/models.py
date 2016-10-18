@@ -28,14 +28,14 @@ class doctypes(models.Model):
 
 class docgeowords(models.Model):
     dgeo_pk = models.AutoField(primary_key=True)
-    dgeo_geow_fk = models.ForeignKey("geowords",db_column="dgeo_geow_fk",db_constraint=False)
-    dgeo_doc_fk = models.ForeignKey("documents",db_column="dgeo_doc_fk",db_constraint=False)
+    dgeo_geow_fk = models.ForeignKey("geowords",db_column="dgeo_geow_fk")
+    dgeo_doc_fk = models.ForeignKey("documents",db_column="dgeo_doc_fk")
     dgeo_rank = models.IntegerField()
     dgeo_comment = models.CharField(max_length=64)
 class dockeywords(models.Model):
     dkey_pk = models.AutoField(primary_key=True)
-    dkey_doc_fk = models.ForeignKey("documents",db_column="dkey_doc_fk",db_constraint=False)
-    dkey_keyw_fk = models.ForeignKey("keywords",db_column="dkey_keyw_fk",db_constraint=False)
+    dkey_doc_fk = models.ForeignKey("documents",db_column="dkey_doc_fk")
+    dkey_keyw_fk = models.ForeignKey("keywords",db_column="dkey_keyw_fk")
     dkey_comment = models.CharField(null=True,blank=True,max_length=64)
     dkey_value1 = models.CharField(null=True,blank=True,max_length=16)
     dkey_value2 = models.CharField(null=True,blank=True,max_length=16)
@@ -43,8 +43,8 @@ class dockeywords(models.Model):
     dkey_rank = models.IntegerField()
 class docreviews(models.Model):
     drag_pk = models.AutoField(primary_key=True)
-    drag_doc_fk = models.ForeignKey("documents",db_column="drag_doc_fk",db_constraint=False)
-    drag_rag_fk = models.ForeignKey("reviewingagencies",db_column="drag_rag_fk",db_constraint=False)
+    drag_doc_fk = models.ForeignKey("documents",db_column="drag_doc_fk")
+    drag_rag_fk = models.ForeignKey("reviewingagencies",db_column="drag_rag_fk")
     drag_comment = models.CharField(null=True,blank=True,max_length=64)
     drag_received = models.DateField(null=True,blank=True)
     drag_sentbysch = models.NullBooleanField(null=True,blank=True)
@@ -61,24 +61,24 @@ class docreviews(models.Model):
 
 class doccomments(models.Model):
     dcom_pk = models.AutoField(primary_key=True)
-    dcom_drag_fk = models.ForeignKey("docreviews",db_column="dcom_drag_fk",db_constraint=False)
-    dcom_doc_fk = models.ForeignKey("documents",db_column="dcom_doc_fk",db_constraint=False)
+    dcom_drag_fk = models.ForeignKey("docreviews",db_column="dcom_drag_fk")
+    dcom_doc_fk = models.ForeignKey("documents",db_column="dcom_doc_fk")
     dcom_commentdate = models.DateField(null=True,blank=True)
     dcom_textcomment = models.TextField(null=True,blank=True)
     dcom_filecomment = models.FileField(null=True,blank=True,upload_to='documents/%Y/%m/%d')
-    dcom_reviewer_userid = models.ForeignKey(User,db_column="dcom_reviewer_userid",db_constraint=False)
+    dcom_reviewer_userid = models.ForeignKey(User,db_column="dcom_reviewer_userid")
 
 class docattachments(models.Model):
     datt_pk = models.AutoField(primary_key=True)
-    datt_doc_fk = models.ForeignKey("documents",db_column="datt_doc_fk",db_constraint=False)
+    datt_doc_fk = models.ForeignKey("documents",db_column="datt_doc_fk")
     datt_file = models.FileField(null=True,blank=True,upload_to='documents/%Y/%m/%d')
 
 class documents(models.Model):
     doc_pk = models.AutoField(primary_key=True)
-    doc_prj_fk = models.ForeignKey("projects",null=True,blank=True,db_column="doc_prj_fk",db_constraint=False)
-    doc_cnty_fk = models.ForeignKey("counties",null=True,blank=True,db_column="doc_cnty_fk",db_constraint=False)
+    doc_prj_fk = models.ForeignKey("projects",null=True,blank=True,db_column="doc_prj_fk")
+    doc_cnty_fk = models.ForeignKey("counties",null=True,blank=True,db_column="doc_cnty_fk")
     doc_schno = models.CharField(null=True,blank=True,max_length=12,db_index=True)
-    doc_doct_fk = models.ForeignKey("doctypes",null=True,blank=True,db_column="doc_doct_fk",db_constraint=False)
+    doc_doct_fk = models.ForeignKey("doctypes",null=True,blank=True,db_column="doc_doct_fk")
     doc_doctype = models.CharField(null=True,blank=True,max_length=32)
     doc_docname = models.CharField(null=True,blank=True,max_length=64)
     doc_title = models.TextField(null=True,blank=True)
@@ -175,9 +175,9 @@ class documents(models.Model):
     doc_added = models.DateField(null=True,blank=True)
     doc_draft = models.NullBooleanField()
     doc_clerknotes = models.TextField(null=True,blank=True)
-    doc_added_userid = models.ForeignKey(User,db_column="doc_added_userid",related_name="+",db_constraint=False)
-    doc_assigned_userid = models.ForeignKey(User,db_column="doc_assigned_userid",related_name="+",db_constraint=False)
-    doc_lastlooked_userid = models.ForeignKey(User,db_column="doc_lastlooked_userid",related_name="+",db_constraint=False)
+    doc_added_userid = models.ForeignKey(User,db_column="doc_added_userid",related_name="+")
+    doc_assigned_userid = models.ForeignKey(User,db_column="doc_assigned_userid",related_name="+")
+    doc_lastlooked_userid = models.ForeignKey(User,db_column="doc_lastlooked_userid",related_name="+")
     doc_approve_noe = models.CharField(null=True,blank=True,max_length=64)
     doc_carryout_noe = models.CharField(null=True,blank=True,max_length=64)
     doc_nodfeespaid = models.NullBooleanField()
@@ -201,14 +201,14 @@ class geowordlists(models.Model):
 
 class geowords(models.Model):
     geow_pk = models.AutoField(primary_key=True)
-    geow_geol_fk = models.ForeignKey("geowordlists",db_column="geow_geol_fk",db_constraint=False)
+    geow_geol_fk = models.ForeignKey("geowordlists",db_column="geow_geol_fk")
     geow_shortname = models.CharField(max_length=32,db_index=True)
     geow_longname = models.CharField(max_length=64)
     geow_description = models.TextField(null=True)
     geow_originalcontrolid = models.CharField(max_length=10)
     geow_recordsource = models.CharField(max_length=10)
     inlookup = models.BooleanField(default=True)
-    geow_parent_fk = models.ForeignKey("geowords",db_column="geow_parent_fk",db_constraint=False,null=True)
+    geow_parent_fk = models.ForeignKey("geowords",db_column="geow_parent_fk",null=True)
 
     class Meta:
         verbose_name = "Geoword"
@@ -233,7 +233,7 @@ class keywordlists(models.Model):
 
 class keywords(models.Model):
     keyw_pk = models.AutoField(primary_key=True)
-    keyw_keyl_fk = models.ForeignKey("keywordlists",db_column="keyw_keyl_fk",db_constraint=False)
+    keyw_keyl_fk = models.ForeignKey("keywordlists",db_column="keyw_keyl_fk")
     keyw_shortname = models.CharField(max_length=32)
     keyw_longname = models.CharField(max_length=64)
     keyw_description = models.TextField()
@@ -252,7 +252,7 @@ class keywords(models.Model):
 
 class latlongs(models.Model):
     doc_pk = models.AutoField(primary_key=True)
-    doc_prj_fk = models.ForeignKey("projects",db_column="doc_prj_fk",db_constraint=False)
+    doc_prj_fk = models.ForeignKey("projects",db_column="doc_prj_fk")
     doc_schno = models.CharField(null=True,blank=True,max_length=12)
     doc_doctype = models.CharField(max_length=32)
     doc_lat_deg = models.CharField(null=True,blank=True,max_length=12)
@@ -267,7 +267,7 @@ class latlongs(models.Model):
 
 class leadagencies(models.Model):
     lag_pk = models.AutoField(primary_key=True)
-    lag_geow_fk = models.ForeignKey("geowords",db_column="lag_geow_fk",db_constraint=False)
+    lag_geow_fk = models.ForeignKey("geowords",db_column="lag_geow_fk")
     lag_domain = models.CharField(max_length=20)
     lag_name = models.CharField(max_length=90,db_index=True)
     lag_title = models.CharField(max_length=90)
@@ -301,11 +301,11 @@ class projectsManager(models.Manager):
 class projects(models.Model):
     objects = projectsManager()
     prj_pk = models.AutoField(primary_key=True)
-    prj_lag_fk = models.ForeignKey("leadagencies",db_column="prj_lag_fk",db_constraint=False)
+    prj_lag_fk = models.ForeignKey("leadagencies",db_column="prj_lag_fk")
     prj_schno = models.CharField(null=True,blank=True,max_length=12)
     prj_title = models.CharField(null=True,blank=True,max_length=160)
     prj_comments = models.TextField(null=True,blank=True)
-    prj_doc_fk = models.ForeignKey("documents",db_column="prj_doc_fk",db_constraint=False)
+    prj_doc_fk = models.ForeignKey("documents",db_column="prj_doc_fk")
     prj_status = models.CharField(null=True,blank=True,max_length=32)
     prj_description = models.TextField(null=True,blank=True)
     prj_datefirst = models.DateField(null=True,blank=True)
@@ -361,8 +361,8 @@ class reviewingagencies(models.Model):
 
 class userprofile(models.Model):
     user = models.OneToOneField(User)
-    set_lag_fk = models.ForeignKey("leadagencies",blank=True,null=True,db_column="set_lag_fk",db_constraint=False)
-    set_rag_fk = models.ForeignKey("reviewingagencies",blank=True,null=True,db_column="set_rag_fk",db_constraint=False)
+    set_lag_fk = models.ForeignKey("leadagencies",blank=True,null=True,db_column="set_lag_fk")
+    set_rag_fk = models.ForeignKey("reviewingagencies",blank=True,null=True,db_column="set_rag_fk")
     conphone = models.CharField(null=True,blank=True,max_length=32)
 
 def create_user_profile(sender, instance, created, **kwargs):
@@ -372,11 +372,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=User)
 
 class requestupgrade(models.Model):
-    user_id = models.OneToOneField(User,db_column="user_id",db_constraint=False)
+    user_id = models.OneToOneField(User,db_column="user_id")
     rqst_pending = models.NullBooleanField(null=True,blank=True)
     rqst_type = models.CharField(null=True,blank=True,max_length=10)
-    rqst_lag_fk = models.ForeignKey("leadagencies",blank=True,null=True,db_column="rqst_lag_fk",db_constraint=False)
-    rqst_rag_fk = models.ForeignKey("reviewingagencies",blank=True,null=True,db_column="rqst_rag_fk",db_constraint=False)
+    rqst_lag_fk = models.ForeignKey("leadagencies",blank=True,null=True,db_column="rqst_lag_fk")
+    rqst_rag_fk = models.ForeignKey("reviewingagencies",blank=True,null=True,db_column="rqst_rag_fk")
     rqst_reason = models.TextField(null=True,blank=True)
     
     class Meta:
@@ -395,7 +395,7 @@ class clearinghouse(models.Model):
 
 class Locations(models.Model):
     '''Spatial model to store locations associations with Documents'''
-    document = models.ForeignKey("documents",db_column="doc_pk",db_constraint=False)
+    document = models.ForeignKey("documents",db_column="doc_pk")
     geom = models.GeometryCollectionField()
     objects = models.GeoManager()
 
