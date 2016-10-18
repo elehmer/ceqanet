@@ -34,10 +34,14 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
+
 # Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.sites',
+    'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,12 +49,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'localflavor',
-    'registration',
     'olwidget',
     'ceqanet.app',
 )
 
-AUTH_PROFILE_MODULE = 'ceqanet.app.UserProfile'
+#AUTH_PROFILE_MODULE = 'ceqanet.app.UserProfile'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
