@@ -2,7 +2,7 @@
 django==1.8.15
 psycopg2==2.4.5
 django-localflavor==1.0
-git+https://github.com/macropin/django-registration.git#egg=django-registration-redux
+git+https://github.com/elehmer/django-registration.git#egg=django-registration-redux
 git+https://github.com/elehmer/olwidget.git#egg=django-olwidget
 vectorformats==0.1
 simplejson==2.3.2
