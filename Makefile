@@ -19,7 +19,7 @@ PYC ?= python $(shell python -c 'import compileall; print(compileall.__file__)')
 pyver ?= $(shell python -c \
 	"import sys; print('python{}.{}'.format(sys.version_info.major, sys.version_info.minor))")
 
-.PHONY : all build venv olwidget-templates olwidget-static
+.PHONY : all build venv
 
 all: build
 
@@ -30,12 +30,4 @@ $(venvdir)/bin/activate: requirements.txt
 	. $@; pip install -r $^
 	touch $@
 
-# Link olwidget template directory in venv to project template dir
-olwidget-templates:
-	ln -nfs $(venvdir)/olwidget/templates/olwidget $(templatesdir)/olwidget
-
-# Link olwidget static directory in venv to project static dir
-olwidget-static:
-	ln -nfs $(venvdir)/olwidget/static/olwidget $(staticdir)/olwidget
-
-build: venv olwidget-templates olwidget-static $(addsuffix c, $(pysrc))
+build: venv $(addsuffix c, $(pysrc))
