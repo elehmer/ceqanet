@@ -27,6 +27,9 @@ all: build
 venv: $(venvdir)/bin/activate
 $(venvdir)/bin/activate: requirements.txt
 	test -d $(venvdir) || virtualenv $(venvdir)
+	# Django needs to be installed before other django dependent apps	
+	. $@; pip install "$$(grep '^django==' $^)"
+	# Install other dependencies in requirements.txt
 	. $@; pip install -r $^
 	touch $@
 
